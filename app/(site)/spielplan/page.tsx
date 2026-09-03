@@ -9,7 +9,7 @@ import { getResults } from "@/lib/store";
 export const metadata: Metadata = {
   title: "Spielplan & Resultate",
   description:
-    "Alle Spiele und Resultate der Zürisee Pikes in der Saison 2026/27 – Stärkeklasse 3, Gruppe Ost.",
+    "Alle Spiele und Resultate der Zürisee Pikes in der Saison 2026/27 – Gruppe D der ZEP.",
 };
 
 function FixtureRow({ f }: { f: Game }) {
@@ -84,7 +84,7 @@ export default async function SchedulePage() {
   const byCompetition = (c: Competition) =>
     games.filter((g) => g.competition === c && g.status === "final");
 
-  const liga = byCompetition("Stärkeklasse 3 · Gruppe Ost");
+  const liga = byCompetition("Gruppe D");
   const playoff = byCompetition("Playoff");
 
   const upcomingComp = upcoming[0]?.competition ?? "Vorbereitung 2026/27";
@@ -94,7 +94,7 @@ export default async function SchedulePage() {
       <PageHero
         eyebrow="Saison 2026/27"
         title="Spielplan & Resultate"
-        intro="Die Pikes spielen in der Stärkeklasse 3, Gruppe Ost der ZEP. Unten findest du alle Partien der Saison 2026/27 und die Resultate der bereits gespielten Runden."
+        intro="Die Pikes spielen in der Gruppe D der ZEP. Unten findest du alle Partien der Saison 2026/27 und die Resultate der bereits gespielten Runden."
       />
 
       <section className="py-14 sm:py-20">
@@ -109,7 +109,7 @@ export default async function SchedulePage() {
               <h2 className="text-3xl uppercase text-navy">Kommende Spiele</h2>
             </div>
             {upcoming.length > 0 ? (
-              <FixtureGroup title={upcomingComp} items={upcoming} accent={club.division} />
+              <FixtureGroup title={upcomingComp} items={upcoming} accent="Saison 2026/27" />
             ) : (
               <p className="card rounded p-6 text-navy/60">Aktuell sind keine Spiele angesetzt – der neue Spielplan folgt.</p>
             )}
@@ -120,7 +120,7 @@ export default async function SchedulePage() {
             <div>
               <h2 className="mb-6 text-3xl uppercase text-navy">Resultate 2026/27</h2>
               <div className="grid gap-6 lg:grid-cols-2">
-                <FixtureGroup title="Stärkeklasse 3 · Gruppe Ost" items={liga} accent="Qualifikation" />
+                <FixtureGroup title="Gruppe D" items={liga} accent="Qualifikation" />
                 <FixtureGroup title="Playoff" items={playoff} accent="K.-o.-Runde" />
               </div>
             </div>

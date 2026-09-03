@@ -11,7 +11,7 @@ export const club = {
   tagline: "Eishockey vom Zürichsee",
   league: "ZEP – Zürcher Eishockey Plauschliga",
   leagueUrl: "https://www.zep.ch/",
-  division: "Stärkeklasse 3 · Gruppe Ost",
+  division: "Gruppe D",
   founded: 2026,
   homeRink: "Kunsteisbahn Küsnacht (KEK)",
   homeRinkAddress: "Johannisburgstrasse 22, 8700 Küsnacht ZH",
@@ -112,7 +112,7 @@ export const historyIntro =
   "Die Zürisee Pikes wurden 2026 von einer Handvoll eishockeyverrückter Freunde aus der Region Zürichsee gegründet – an einem Stammtisch in Stäfa, bei dem mehr über Bullys als über Bier diskutiert wurde. Der Name war schnell gefunden: Der Hecht («Pike») ist der König des Sees – schnell, wendig und mit ordentlich Biss. Genau so wollten wir Eishockey spielen.";
 
 export const historyText =
-  "Aus dem losen Plauschteam wurde ein fester Verein in der Zürcher Eishockey Plauschliga (ZEP). Wir starteten zuunterst, lernten in jeder Saison dazu und arbeiteten uns Stärkeklasse um Stärkeklasse nach oben. Heute spielen wir in der Stärkeklasse 3, Gruppe Ost – aber wichtiger als jede Tabelle ist, dass nach dem Schlusspfiff alle gemeinsam in der Garderobe sitzen. Fairplay, Kameradschaft und Freude am Spiel stehen bei uns über dem Resultat.";
+  "Aus dem losen Plauschteam wurde ein fester Verein in der Zürcher Eishockey Plauschliga (ZEP). Wir starteten zuunterst und lernen in jeder Saison dazu. Heute spielen wir in der Gruppe D – aber wichtiger als jede Tabelle ist, dass nach dem Schlusspfiff alle gemeinsam in der Garderobe sitzen. Fairplay, Kameradschaft und Freude am Spiel stehen bei uns über dem Resultat.";
 
 export type Milestone = { year: string; title: string; text: string };
 
@@ -121,7 +121,7 @@ export const milestones: Milestone[] = [
   { year: "2026", title: "Logo & Name", text: "Der Hecht («Pike») wird zum Wappentier: schnell, wendig und mit ordentlich Biss. Das Emblem ist geboren." },
   { year: "2026", title: "Erstes Eistraining", text: "Premiere auf dem Eis der Kunsteisbahn Küsnacht – die ersten Schlittschuhe werden geschnürt." },
   { year: "2026", title: "Aufnahme in die ZEP", text: "Die Pikes werden in die Zürcher Eishockey Plauschliga aufgenommen." },
-  { year: "2026/27", title: "Erste Saison", text: "Die Pikes bestreiten ihre erste Spielzeit in der Stärkeklasse 3, Gruppe Ost." },
+  { year: "2026/27", title: "Erste Saison", text: "Die Pikes bestreiten ihre erste Spielzeit in der Gruppe D." },
 ];
 
 // ------------------------------------------------------------
@@ -130,7 +130,7 @@ export const milestones: Milestone[] = [
 // schedule is static. Scores are not part of a Fixture — they are entered
 // in the admin and merged in via toGames().
 // ------------------------------------------------------------
-export type Competition = "Stärkeklasse 3 · Gruppe Ost" | "Playoff" | "Vorbereitung 2026/27";
+export type Competition = "Gruppe D" | "Playoff" | "Vorbereitung 2026/27";
 
 export type Fixture = {
   id: string;
@@ -153,18 +153,18 @@ export type Game = Fixture & {
 
 export const fixtures: Fixture[] = [
   // -- Qualifikation 2026/27 (Spielplan ZEP) --
-  { id: "g2627-01", date: "2026-10-11T08:00:00+02:00", opponent: "Horgner Dolphins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-02", date: "2026-11-01T08:00:00+01:00", opponent: "EHC Züri Devils", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-03", date: "2026-11-29T15:00:00+01:00", opponent: "Horgner Dolphins", isHome: false, venue: "Trainingshalle od. Arena Zug", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-04", date: "2026-12-13T07:45:00+01:00", opponent: "Cat Lake City Flyers", isHome: false, venue: "Eishalle Neudorf Oerlikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-05", date: "2027-01-03T08:00:00+01:00", opponent: "Cat Lake City Flyers", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-06", date: "2027-01-15T20:30:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: false, venue: "Eishalle Dübendorf", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-07", date: "2027-01-16T19:15:00+01:00", opponent: "The Pinguins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-08", date: "2027-01-30T19:15:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-09", date: "2027-01-31T17:00:00+01:00", opponent: "EHC Züri Devils", isHome: false, venue: "Eishalle Wetzikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-10", date: "2027-02-07T20:00:00+01:00", opponent: "The Pinguins", isHome: false, venue: "Kunsteisbahn Urdorf", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-11", date: "2027-02-20T16:15:00+01:00", opponent: "SC Blue Eagles", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
-  { id: "g2627-12", date: "2027-03-12T21:30:00+01:00", opponent: "SC Blue Eagles", isHome: false, venue: "Eishalle Wetzikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-01", date: "2026-10-11T08:00:00+02:00", opponent: "Horgner Dolphins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-02", date: "2026-11-01T08:00:00+01:00", opponent: "EHC Züri Devils", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-03", date: "2026-11-29T15:00:00+01:00", opponent: "Horgner Dolphins", isHome: false, venue: "Trainingshalle od. Arena Zug", competition: "Gruppe D" },
+  { id: "g2627-04", date: "2026-12-13T07:45:00+01:00", opponent: "Cat Lake City Flyers", isHome: false, venue: "Eishalle Neudorf Oerlikon", competition: "Gruppe D" },
+  { id: "g2627-05", date: "2027-01-03T08:00:00+01:00", opponent: "Cat Lake City Flyers", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-06", date: "2027-01-15T20:30:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: false, venue: "Eishalle Dübendorf", competition: "Gruppe D" },
+  { id: "g2627-07", date: "2027-01-16T19:15:00+01:00", opponent: "The Pinguins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-08", date: "2027-01-30T19:15:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-09", date: "2027-01-31T17:00:00+01:00", opponent: "EHC Züri Devils", isHome: false, venue: "Eishalle Wetzikon", competition: "Gruppe D" },
+  { id: "g2627-10", date: "2027-02-07T20:00:00+01:00", opponent: "The Pinguins", isHome: false, venue: "Kunsteisbahn Urdorf", competition: "Gruppe D" },
+  { id: "g2627-11", date: "2027-02-20T16:15:00+01:00", opponent: "SC Blue Eagles", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-12", date: "2027-03-12T21:30:00+01:00", opponent: "SC Blue Eagles", isHome: false, venue: "Eishalle Wetzikon", competition: "Gruppe D" },
 ];
 
 /** Merge the stored scores onto the static schedule. */

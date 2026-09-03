@@ -43,7 +43,7 @@ export default async function Home() {
 
   const stats = [
     { value: club.founded.toString(), label: "Gegründet" },
-    { value: "3", label: "Stärkeklasse" },
+    { value: "D", label: "Gruppe" },
     { value: roster.length.toString(), label: "Spieler" },
     { value: scheduled.toString(), label: "Spiele 26/27" },
   ];
