@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Zürisee Pikes — Design System
+   Palette derived from the club emblem:
+   deep navy · warm cream/parchment · olive (pike) green
+   ============================================================ */
+
+@theme {
+  /* Brand colours */
+  --color-navy: #1b3b58;
+  --color-navy-700: #173249;
+  --color-navy-800: #122639;
+  --color-navy-900: #0d1b29;
+  --color-ink: #0a141d;
+
+  --color-cream: #f3e9d3;
+  --color-cream-soft: #f8f1e1;
+  --color-parchment: #fbf6ea;
+  --color-sand: #e9dcbe;
+
+  --color-olive: #6e7548;
+  --color-olive-600: #5e653c;
+  --color-olive-400: #8a9162;
+  --color-olive-200: #c3c79f;
+
+  --color-gold: #c9a24b;
+
+  /* Semantic */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-navy-900);
+
+  /* Typography */
+  --font-display: var(--font-oswald), "Arial Narrow", sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-stat: var(--font-barlow), system-ui, sans-serif;
+
+  /* Layout */
+  --shadow-card: 0 1px 2px rgba(13, 27, 41, 0.06), 0 8px 24px -12px rgba(13, 27, 41, 0.25);
+  --shadow-lift: 0 18px 50px -22px rgba(13, 27, 41, 0.55);
+}
+
+@layer base {
+  * {
+    border-color: color-mix(in srgb, var(--color-navy) 12%, transparent);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-navy-900);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.02;
+  }
+
+  ::selection {
+    background-color: var(--color-olive);
+    color: var(--color-cream);
+  }
+}
+
+@layer components {
+  .container-px {
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-px { padding-inline: 2rem; }
+  }
+
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+  }
+
+  /* Condensed athletic display label */
+  .eyebrow {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-weight: 600;
+    font-size: 0.72rem;
+  }
+
+  .display-stroke {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.015em;
+  }
+
+  /* Vintage emblem ring / ice texture backgrounds */
+  .ice-grid {
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--color-cream) 92%, var(--color-navy)) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--color-cream) 92%, var(--color-navy)) 1px, transparent 1px);
+    background-size: 38px 38px;
+  }
+
+  .noise {
+    position: relative;
+  }
+  .noise::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 2px;
+    transition: transform 0.15s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    line-height: 1;
+  }
+  .btn:active { transform: translateY(1px); }
+
+  .btn-primary {
+    background-color: var(--color-navy);
+    color: var(--color-cream);
+  }
+  .btn-primary:hover {
+    background-color: var(--color-navy-800);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .btn-olive {
+    background-color: var(--color-olive);
+    color: var(--color-cream-soft);
+  }
+  .btn-olive:hover { background-color: var(--color-olive-600); }
+
+  .btn-ghost {
+    border: 1.5px solid color-mix(in srgb, var(--color-cream) 55%, transparent);
+    color: var(--color-cream);
+  }
+  .btn-ghost:hover {
+    background-color: var(--color-cream);
+    color: var(--color-navy-900);
+  }
+
+  .card {
+    background-color: var(--color-parchment);
+    border: 1px solid color-mix(in srgb, var(--color-navy) 10%, transparent);
+    box-shadow: var(--shadow-card);
+  }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1.5px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.25s ease;
+  }
+  .link-underline:hover { background-size: 100% 1.5px; }
+
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Legal / long-form text */
+  .prose-legal {
+    color: color-mix(in srgb, var(--color-navy-900) 78%, transparent);
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  .prose-legal h2 {
+    color: var(--color-navy);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-legal h3 {
+    color: var(--color-navy);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-top: 1.75rem;
+    margin-bottom: 0.4rem;
+  }
+  .prose-legal p { margin-bottom: 1rem; }
+  .prose-legal ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .prose-legal li { margin-bottom: 0.35rem; }
+  .prose-legal a {
+    color: var(--color-olive-600);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-legal strong { color: var(--color-navy); font-weight: 600; }
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; }
+}
+
+/* Reveal-on-scroll */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+}

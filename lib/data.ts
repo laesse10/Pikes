@@ -1,0 +1,309 @@
+// ============================================================
+// Zürisee Pikes — all site content.
+// Everything here is static and ships with the build. The only thing
+// editable at runtime is the score of each game (see lib/store.ts).
+// Kader, Sponsoren und Galerie sind noch Platzhalter.
+// ============================================================
+
+export const club = {
+  name: "Zürisee Pikes",
+  shortName: "Pikes",
+  tagline: "Eishockey vom Zürichsee",
+  league: "ZEP – Zürcher Eishockey Plauschliga",
+  leagueUrl: "https://www.zep.ch/",
+  division: "Stärkeklasse 3 · Gruppe Ost",
+  founded: 2026,
+  homeRink: "Kunsteisbahn Küsnacht (KEK)",
+  homeRinkAddress: "Johannisburgstrasse 22, 8700 Küsnacht ZH",
+  email: "info@zueriseepikes.ch",
+  phone: "+41 44 000 00 00",
+  region: "Zürichsee, Kanton Zürich",
+  colors: ["Navy", "Crème", "Oliv"],
+  social: {
+    instagram: "https://instagram.com",
+    facebook: "https://facebook.com",
+  },
+} as const;
+
+/** Mannschaftsfoto: Datei in /public ablegen und den Pfad hier eintragen. */
+export const teamPhotoUrl: string | undefined = undefined;
+
+export type NavItem = { label: string; href: string };
+
+export const primaryNav: NavItem[] = [
+  { label: "Start", href: "/" },
+  { label: "Team", href: "/team" },
+  { label: "Spielplan", href: "/spielplan" },
+  { label: "Sponsoren", href: "/sponsoren" },
+  { label: "Galerie", href: "/galerie" },
+  { label: "Mitmachen", href: "/mitmachen" },
+];
+
+export const legalNav: NavItem[] = [
+  { label: "Impressum", href: "/impressum" },
+  { label: "Datenschutz", href: "/datenschutz" },
+];
+
+// ------------------------------------------------------------
+// Roster
+// ------------------------------------------------------------
+export type Position = "Torhüter" | "Verteidigung" | "Sturm";
+
+export type Player = {
+  /** Jersey number as printed on the shirt — a string, so "00" stays "00". */
+  number: string;
+  name: string;
+  /** Not yet known for the current squad; players without one show under "Kader". */
+  position?: Position;
+  shoots?: "L" | "R";
+  since?: number;
+  role?: "C" | "A"; // Captain / Assistant
+  note?: string;
+};
+
+// Kader 2026/27. Positionen, Captain/Assistent und Schusshand sind noch offen –
+// einfach beim jeweiligen Spieler ergänzen, z. B.:
+//   { number: "11", name: "Lars Hulsbergen", position: "Sturm", shoots: "L", role: "C" },
+export const roster: Player[] = [
+  { number: "00", name: "Sebastian Bensland" },
+  { number: "7", name: "Oliver Binkert" },
+  { number: "11", name: "Lars Hulsbergen" },
+  { number: "13", name: "Loris Bornatico" },
+  { number: "14", name: "Alexander Lebeda" },
+  { number: "15", name: "Erik Meier" },
+  { number: "16", name: "Robin Schellenberg" },
+  { number: "17", name: "Julius Unger" },
+  { number: "18", name: "Raphael Messerli" },
+  { number: "21", name: "Gian Welti" },
+  { number: "28", name: "Leandro Bornatico" },
+  { number: "29", name: "Kevin Vizner" },
+  { number: "31", name: "Nikolas Unger" },
+  { number: "33", name: "Eric Frey" },
+  { number: "34", name: "Oliver Kalla" },
+  { number: "39", name: "Dominik Gut" },
+  { number: "66", name: "Alexander Bensland" },
+  { number: "71", name: "Benedict Stüdi" },
+  { number: "76", name: "Vincent Brely-Demeules" },
+  { number: "77", name: "Benedikt Steiner" },
+  { number: "81", name: "Marc Ramseier" },
+  { number: "87", name: "Maximilian Eberle" },
+  { number: "89", name: "Milo Marsland" },
+  { number: "90", name: "Colin Rieffel" },
+];
+
+export type Staff = {
+  name: string;
+  role: string;
+  note?: string;
+};
+
+export const staff: Staff[] = [
+  { name: "Andreas «Sege» Seger", role: "Head Coach", note: "Seit 2018 an der Bande" },
+  { name: "Martin Egli", role: "Assistenztrainer" },
+  { name: "Philipp Brunner", role: "Goalie-Coach" },
+  { name: "Sandra Lüthi", role: "Teammanagerin" },
+  { name: "Bruno Hafner", role: "Materialwart", note: "Hält die Kufen scharf" },
+];
+
+// ------------------------------------------------------------
+// Club history
+// ------------------------------------------------------------
+export const historyIntro =
+  "Die Zürisee Pikes wurden 2026 von einer Handvoll eishockeyverrückter Freunde aus der Region Zürichsee gegründet – an einem Stammtisch in Stäfa, bei dem mehr über Bullys als über Bier diskutiert wurde. Der Name war schnell gefunden: Der Hecht («Pike») ist der König des Sees – schnell, wendig und mit ordentlich Biss. Genau so wollten wir Eishockey spielen.";
+
+export const historyText =
+  "Aus dem losen Plauschteam wurde ein fester Verein in der Zürcher Eishockey Plauschliga (ZEP). Wir starteten zuunterst, lernten in jeder Saison dazu und arbeiteten uns Stärkeklasse um Stärkeklasse nach oben. Heute spielen wir in der Stärkeklasse 3, Gruppe Ost – aber wichtiger als jede Tabelle ist, dass nach dem Schlusspfiff alle gemeinsam in der Garderobe sitzen. Fairplay, Kameradschaft und Freude am Spiel stehen bei uns über dem Resultat.";
+
+export type Milestone = { year: string; title: string; text: string };
+
+export const milestones: Milestone[] = [
+  { year: "2026", title: "Die Gründung", text: "Eine Handvoll eishockeyverrückter Freunde gründet die Zürisee Pikes – an einem Stammtisch in Stäfa." },
+  { year: "2026", title: "Logo & Name", text: "Der Hecht («Pike») wird zum Wappentier: schnell, wendig und mit ordentlich Biss. Das Emblem ist geboren." },
+  { year: "2026", title: "Erstes Eistraining", text: "Premiere auf dem Eis der Kunsteisbahn Küsnacht – die ersten Schlittschuhe werden geschnürt." },
+  { year: "2026", title: "Aufnahme in die ZEP", text: "Die Pikes werden in die Zürcher Eishockey Plauschliga aufgenommen." },
+  { year: "2026/27", title: "Erste Saison", text: "Die Pikes bestreiten ihre erste Spielzeit in der Stärkeklasse 3, Gruppe Ost." },
+];
+
+// ------------------------------------------------------------
+// Schedule
+// Dates, opponents and venues are fixed for the whole season, so the
+// schedule is static. Scores are not part of a Fixture — they are entered
+// in the admin and merged in via toGames().
+// ------------------------------------------------------------
+export type Competition = "Stärkeklasse 3 · Gruppe Ost" | "Playoff" | "Vorbereitung 2026/27";
+
+export type Fixture = {
+  id: string;
+  date: string; // ISO datetime
+  opponent: string;
+  isHome: boolean;
+  venue: string;
+  competition: Competition;
+  round?: string;
+};
+
+/** Goals for/against the Pikes — the only runtime-editable data on the site. */
+export type Result = { gf: number; ga: number };
+
+/** A fixture with its score merged in. This is what the pages render. */
+export type Game = Fixture & {
+  result?: Result;
+  status: "final" | "upcoming";
+};
+
+export const fixtures: Fixture[] = [
+  // -- Qualifikation 2026/27 (Spielplan ZEP) --
+  { id: "g2627-01", date: "2026-10-11T08:00:00+02:00", opponent: "Horgner Dolphins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-02", date: "2026-11-01T08:00:00+01:00", opponent: "EHC Züri Devils", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-03", date: "2026-11-29T15:00:00+01:00", opponent: "Horgner Dolphins", isHome: false, venue: "Trainingshalle od. Arena Zug", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-04", date: "2026-12-13T07:45:00+01:00", opponent: "Cat Lake City Flyers", isHome: false, venue: "Eishalle Neudorf Oerlikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-05", date: "2027-01-03T08:00:00+01:00", opponent: "Cat Lake City Flyers", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-06", date: "2027-01-15T20:30:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: false, venue: "Eishalle Dübendorf", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-07", date: "2027-01-16T19:15:00+01:00", opponent: "The Pinguins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-08", date: "2027-01-30T19:15:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-09", date: "2027-01-31T17:00:00+01:00", opponent: "EHC Züri Devils", isHome: false, venue: "Eishalle Wetzikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-10", date: "2027-02-07T20:00:00+01:00", opponent: "The Pinguins", isHome: false, venue: "Kunsteisbahn Urdorf", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-11", date: "2027-02-20T16:15:00+01:00", opponent: "SC Blue Eagles", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Stärkeklasse 3 · Gruppe Ost" },
+  { id: "g2627-12", date: "2027-03-12T21:30:00+01:00", opponent: "SC Blue Eagles", isHome: false, venue: "Eishalle Wetzikon", competition: "Stärkeklasse 3 · Gruppe Ost" },
+];
+
+/** Merge the stored scores onto the static schedule. */
+export function toGames(results: Record<string, Result>, list: Fixture[] = fixtures): Game[] {
+  return list.map((f) => {
+    const result = results[f.id];
+    return { ...f, result, status: result ? "final" : "upcoming" };
+  });
+}
+
+export function nextFixture(list: Game[], now: Date = new Date()): Game | undefined {
+  return [...list]
+    .filter((g) => g.status === "upcoming" && new Date(g.date).getTime() > now.getTime())
+    .sort((a, b) => +new Date(a.date) - +new Date(b.date))[0];
+}
+
+export function latestResult(list: Game[], now: Date = new Date()): Game | undefined {
+  return [...list]
+    .filter((g) => g.result && new Date(g.date).getTime() <= now.getTime())
+    .sort((a, b) => +new Date(b.date) - +new Date(a.date))[0];
+}
+
+export function resultLabel(g: Game): "S" | "U" | "N" | null {
+  if (!g.result) return null;
+  const { gf, ga } = g.result;
+  if (gf > ga) return "S"; // Sieg
+  if (gf < ga) return "N"; // Niederlage
+  return "U"; // Unentschieden
+}
+
+// ------------------------------------------------------------
+// Team logos (files live in /public/opponents, Pikes emblem in /public)
+// ------------------------------------------------------------
+const TEAM_LOGOS: Record<string, string> = {
+  "Zürisee Pikes": "/logo.png",
+  "Cat Lake City Flyers": "/opponents/cat-lake-city-flyers.gif",
+  "EHC Blau-Weiss Dübendorf": "/opponents/ehc-blau-weiss-duebendorf.jpg",
+  "EHC Züri Devils": "/opponents/ehc-zueri-devils.gif",
+  "Horgner Dolphins": "/opponents/horgner-dolphins.gif",
+  "SC Blue Eagles": "/opponents/sc-blue-eagles.png",
+  "The Pinguins": "/opponents/the-pinguins.png",
+};
+
+/** Logo path for a team, or undefined when we have none (admin can add teams). */
+export function teamLogo(team: string): string | undefined {
+  return TEAM_LOGOS[team.trim()];
+}
+
+/** Fallback badge text for teams without a logo file. */
+export function teamInitials(team: string): string {
+  return team
+    .replace(/^(EHC|SC|HC|EV|The)\s+/i, "")
+    .split(/[\s-]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+}
+
+// ------------------------------------------------------------
+// Sponsors
+// ------------------------------------------------------------
+export type SponsorTier = "Hauptsponsor" | "Co-Sponsor" | "Supporter";
+export type SponsorGlyph =
+  | "gear" | "drop" | "peak" | "shield" | "bolt"
+  | "wave" | "puck" | "hex" | "leaf" | "crane"
+  | "anchor" | "flame";
+
+export type Sponsor = {
+  name: string;
+  tier: SponsorTier;
+  glyph: SponsorGlyph;
+  url: string;
+  tagline?: string;
+};
+
+export const sponsors: Sponsor[] = [
+  // Hauptsponsoren
+  { name: "Seehof Garage AG", tier: "Hauptsponsor", glyph: "gear", url: "#", tagline: "Ihre Garage am Zürichsee – seit drei Generationen." },
+  { name: "Brauerei Hechtsprung", tier: "Hauptsponsor", glyph: "drop", url: "#", tagline: "Handgebrautes Bier aus der Region. Das offizielle Drittel-Bier der Pikes." },
+
+  // Co-Sponsoren
+  { name: "Zürisee Immobilien", tier: "Co-Sponsor", glyph: "peak", url: "#" },
+  { name: "Alpenblick Versicherung", tier: "Co-Sponsor", glyph: "shield", url: "#" },
+  { name: "Volt & Watt Elektro", tier: "Co-Sponsor", glyph: "bolt", url: "#" },
+  { name: "Frischluft Klimatechnik", tier: "Co-Sponsor", glyph: "wave", url: "#" },
+  { name: "Gipfelsturm Sport", tier: "Co-Sponsor", glyph: "puck", url: "#" },
+  { name: "Seerose Druck & Media", tier: "Co-Sponsor", glyph: "hex", url: "#" },
+
+  // Supporter
+  { name: "Café Anker", tier: "Supporter", glyph: "flame", url: "#" },
+  { name: "Pizzeria da Marco", tier: "Supporter", glyph: "flame", url: "#" },
+  { name: "Coiffure Welle", tier: "Supporter", glyph: "wave", url: "#" },
+  { name: "Blumen Lindenhof", tier: "Supporter", glyph: "leaf", url: "#" },
+  { name: "Velo Wyss", tier: "Supporter", glyph: "gear", url: "#" },
+  { name: "Metzgerei Bachmann", tier: "Supporter", glyph: "anchor", url: "#" },
+  { name: "Bau & Kran Meier AG", tier: "Supporter", glyph: "crane", url: "#" },
+  { name: "Restaurant Seeblick", tier: "Supporter", glyph: "anchor", url: "#" },
+];
+
+export const sponsorTiers: SponsorTier[] = ["Hauptsponsor", "Co-Sponsor", "Supporter"];
+
+// ------------------------------------------------------------
+// Gallery
+// ------------------------------------------------------------
+export type GalleryCategory = "Spieltag" | "Team-Event" | "Garderobe";
+
+export type GalleryItem = {
+  id: string;
+  caption: string;
+  category: GalleryCategory;
+  tone: "navy" | "olive" | "cream";
+  span?: "tall" | "wide";
+};
+
+export const gallery: GalleryItem[] = [
+  { id: "ph01", caption: "Bully zum Saisonstart", category: "Spieltag", tone: "navy", span: "tall" },
+  { id: "ph02", caption: "Powerplay gegen die Wildcats", category: "Spieltag", tone: "olive" },
+  { id: "ph03", caption: "Jubel nach dem 5:2", category: "Spieltag", tone: "cream" },
+  { id: "ph04", caption: "Drittelpause in der Garderobe", category: "Garderobe", tone: "navy", span: "wide" },
+  { id: "ph05", caption: "Sommer-Grillfest am See", category: "Team-Event", tone: "olive" },
+  { id: "ph06", caption: "Torjubel im Heimspiel", category: "Spieltag", tone: "cream" },
+  { id: "ph07", caption: "Mannschaftsfoto 2025/26", category: "Team-Event", tone: "navy" },
+  { id: "ph08", caption: "Goalie-Wand Marco hält", category: "Spieltag", tone: "olive", span: "tall" },
+  { id: "ph09", caption: "Pikes-Fans an der Bande", category: "Spieltag", tone: "cream" },
+];
+
+export function formatDate(iso: string, opts?: Intl.DateTimeFormatOptions): string {
+  return new Intl.DateTimeFormat("de-CH", {
+    timeZone: "Europe/Zurich",
+    ...(opts ?? { day: "2-digit", month: "long", year: "numeric" }),
+  }).format(new Date(iso));
+}
+
+export function formatDayTime(iso: string): string {
+  return new Intl.DateTimeFormat("de-CH", {
+    timeZone: "Europe/Zurich",
+    weekday: "short", day: "2-digit", month: "2-digit", year: "numeric",
+    hour: "2-digit", minute: "2-digit",
+  }).format(new Date(iso));
+}
