@@ -227,9 +227,9 @@ export function teamInitials(team: string): string {
 
 // ------------------------------------------------------------
 // Sponsors
-// Logo files live in /public/sponsors. Most of them are white artwork on a
-// transparent background, so each logo records the colour of its own ink and
-// the tile picks a background that actually contrasts with it.
+// Logo files live in /public/sponsors. The originals under sponsors/ are white
+// artwork on transparency, which is invisible on our cream pages; the web
+// copies are recoloured to near-black so they read on a light background.
 // ------------------------------------------------------------
 export type SponsorTier = "Hauptsponsor" | "Co-Sponsor" | "Supporter";
 
@@ -237,8 +237,6 @@ export type Sponsor = {
   name: string;
   /** Path under /public. */
   logo: string;
-  /** Ink of the logo artwork — decides whether it needs a dark or light tile. */
-  logoInk: "light" | "dark";
   /** Not yet assigned; sponsors without a tier show under "Unsere Partner". */
   tier?: SponsorTier;
   url?: string;
@@ -246,13 +244,13 @@ export type Sponsor = {
 };
 
 export const sponsors: Sponsor[] = [
-  { name: "die Mobiliar", logo: "/sponsors/mobiliar.png", logoInk: "light" },
-  { name: "Quadrik Asset Management AG", logo: "/sponsors/quadrik.png", logoInk: "light" },
-  { name: "Teximp", logo: "/sponsors/teximp.png", logoInk: "dark" },
-  { name: "MRI Medizinisch Radiologisches Institut", logo: "/sponsors/mri.png", logoInk: "light" },
-  { name: "Frauenpraxis Küsnacht", logo: "/sponsors/frauenpraxis.png", logoInk: "light" },
-  { name: "Villa Trasqua", logo: "/sponsors/trasqua.png", logoInk: "light" },
-  { name: "IN", logo: "/sponsors/in.png", logoInk: "light" },
+  { name: "die Mobiliar", logo: "/sponsors/mobiliar.png" },
+  { name: "Quadrik Asset Management AG", logo: "/sponsors/quadrik.png" },
+  { name: "Teximp", logo: "/sponsors/teximp.png" },
+  { name: "MRI Medizinisch Radiologisches Institut", logo: "/sponsors/mri.png" },
+  { name: "Frauenpraxis Küsnacht", logo: "/sponsors/frauenpraxis.png" },
+  { name: "Villa Trasqua", logo: "/sponsors/trasqua.png" },
+  { name: "IN", logo: "/sponsors/in.png" },
 ];
 
 export const sponsorTiers: SponsorTier[] = ["Hauptsponsor", "Co-Sponsor", "Supporter"];
