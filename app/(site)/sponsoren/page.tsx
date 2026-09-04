@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { SponsorMark } from "@/components/SponsorMark";
+import { SponsorTile } from "@/components/SponsorTile";
 import { sponsors, sponsorTiers, type Sponsor } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -18,49 +18,37 @@ const tierMeta: Record<string, { label: string; note: string }> = {
   Supporter: { label: "Supporter", note: "Lokale Betriebe, die den Pikes den Rücken stärken." },
 };
 
-function MainSponsorCard({ s }: { s: Sponsor }) {
-  return (
-    <Link
-      href={s.url}
-      className="card group relative flex flex-col overflow-hidden rounded p-8 transition-shadow hover:shadow-[var(--shadow-lift)] sm:p-10"
-    >
-      <span className="absolute right-0 top-0 rounded-bl bg-olive px-3 py-1 text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-cream-soft">
-        Hauptsponsor
-      </span>
-      <div className="text-navy">
-        <SponsorMark glyph={s.glyph} size={56} />
-      </div>
-      <h3 className="mt-6 font-display text-3xl font-bold uppercase text-navy">{s.name}</h3>
-      {s.tagline && <p className="mt-3 max-w-md text-sm leading-relaxed text-navy/65">{s.tagline}</p>}
-      <span className="link-underline mt-6 self-start font-display text-sm font-semibold uppercase tracking-wide text-olive">
-        Zur Website →
-      </span>
-    </Link>
-  );
-}
+type Section = {
+  key: string;
+  label: string;
+  note: string;
+  size: "sm" | "md" | "lg";
+  cols: string;
+  list: Sponsor[];
+};
 
-function SponsorCard({ s, size }: { s: Sponsor; size: "md" | "sm" }) {
-  const pad = size === "md" ? "p-6" : "p-5";
-  const glyph = size === "md" ? 34 : 26;
-  const text = size === "md" ? "text-xl" : "text-base";
-  return (
-    <Link
-      href={s.url}
-      className="card group flex items-center gap-4 rounded text-navy/70 transition-colors hover:text-navy"
-    >
-      <div className={`flex w-full items-center gap-4 ${pad}`}>
-        <span className="shrink-0 text-navy/70 transition-colors group-hover:text-olive">
-          <SponsorMark glyph={s.glyph} size={glyph} />
-        </span>
-        <span className={`font-display font-semibold uppercase leading-tight ${text}`}>{s.name}</span>
-      </div>
-    </Link>
-  );
+/** Tier sections, plus everyone who has not been assigned a tier yet. */
+function sponsorSections(): Section[] {
+  const sections: Section[] = sponsorTiers.map((tier) => ({
+    key: tier,
+    label: tierMeta[tier].label,
+    note: tierMeta[tier].note,
+    size: tier === "Hauptsponsor" ? "lg" : tier === "Co-Sponsor" ? "md" : "sm",
+    cols: tier === "Hauptsponsor" ? "sm:grid-cols-2" : tier === "Co-Sponsor" ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3 lg:grid-cols-4",
+    list: sponsors.filter((s) => s.tier === tier),
+  }));
+  sections.push({
+    key: "Partner",
+    label: "Unsere Partner",
+    note: "Sie machen den Pikes das Eis möglich.",
+    size: "md",
+    cols: "sm:grid-cols-2 lg:grid-cols-3",
+    list: sponsors.filter((s) => !s.tier),
+  });
+  return sections.filter((s) => s.list.length > 0);
 }
 
 export default function SponsorsPage() {
-  const byTier = (t: string) => sponsors.filter((s) => s.tier === t);
-
   return (
     <>
       <PageHero
@@ -71,44 +59,24 @@ export default function SponsorsPage() {
 
       <section className="py-16 sm:py-20">
         <div className="shell container-px space-y-20">
-          {sponsorTiers.map((tier) => {
-            const list = byTier(tier);
-            const meta = tierMeta[tier];
-            return (
-              <div key={tier}>
-                <SectionHeading eyebrow={meta.note} title={meta.label} />
-                <div className="mt-10">
-                  {tier === "Hauptsponsor" && (
-                    <div className="grid gap-6 md:grid-cols-2">
-                      {list.map((s, i) => (
-                        <Reveal key={s.name} delay={i * 90}>
-                          <MainSponsorCard s={s} />
-                        </Reveal>
-                      ))}
-                    </div>
-                  )}
-                  {tier === "Co-Sponsor" && (
-                    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                      {list.map((s, i) => (
-                        <Reveal key={s.name} delay={(i % 3) * 70}>
-                          <SponsorCard s={s} size="md" />
-                        </Reveal>
-                      ))}
-                    </div>
-                  )}
-                  {tier === "Supporter" && (
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                      {list.map((s, i) => (
-                        <Reveal key={s.name} delay={(i % 4) * 50}>
-                          <SponsorCard s={s} size="sm" />
-                        </Reveal>
-                      ))}
-                    </div>
-                  )}
-                </div>
+          {sponsorSections().map((section) => (
+            <div key={section.key}>
+              <SectionHeading eyebrow={section.note} title={section.label} />
+              <div className={`mt-10 grid gap-5 ${section.cols}`}>
+                {section.list.map((s, i) => (
+                  <Reveal key={s.name} delay={(i % 3) * 70}>
+                    <SponsorTile sponsor={s} size={section.size} />
+                    <p className="mt-3 text-center font-display text-sm font-semibold uppercase tracking-wide text-navy/70">
+                      {s.name}
+                    </p>
+                    {s.tagline && (
+                      <p className="mt-1 text-center text-xs leading-relaxed text-navy/55">{s.tagline}</p>
+                    )}
+                  </Reveal>
+                ))}
               </div>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </section>
 

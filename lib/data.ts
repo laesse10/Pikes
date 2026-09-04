@@ -227,43 +227,32 @@ export function teamInitials(team: string): string {
 
 // ------------------------------------------------------------
 // Sponsors
+// Logo files live in /public/sponsors. Most of them are white artwork on a
+// transparent background, so each logo records the colour of its own ink and
+// the tile picks a background that actually contrasts with it.
 // ------------------------------------------------------------
 export type SponsorTier = "Hauptsponsor" | "Co-Sponsor" | "Supporter";
-export type SponsorGlyph =
-  | "gear" | "drop" | "peak" | "shield" | "bolt"
-  | "wave" | "puck" | "hex" | "leaf" | "crane"
-  | "anchor" | "flame";
 
 export type Sponsor = {
   name: string;
-  tier: SponsorTier;
-  glyph: SponsorGlyph;
-  url: string;
+  /** Path under /public. */
+  logo: string;
+  /** Ink of the logo artwork — decides whether it needs a dark or light tile. */
+  logoInk: "light" | "dark";
+  /** Not yet assigned; sponsors without a tier show under "Unsere Partner". */
+  tier?: SponsorTier;
+  url?: string;
   tagline?: string;
 };
 
 export const sponsors: Sponsor[] = [
-  // Hauptsponsoren
-  { name: "Seehof Garage AG", tier: "Hauptsponsor", glyph: "gear", url: "#", tagline: "Ihre Garage am Zürichsee – seit drei Generationen." },
-  { name: "Brauerei Hechtsprung", tier: "Hauptsponsor", glyph: "drop", url: "#", tagline: "Handgebrautes Bier aus der Region. Das offizielle Drittel-Bier der Pikes." },
-
-  // Co-Sponsoren
-  { name: "Zürisee Immobilien", tier: "Co-Sponsor", glyph: "peak", url: "#" },
-  { name: "Alpenblick Versicherung", tier: "Co-Sponsor", glyph: "shield", url: "#" },
-  { name: "Volt & Watt Elektro", tier: "Co-Sponsor", glyph: "bolt", url: "#" },
-  { name: "Frischluft Klimatechnik", tier: "Co-Sponsor", glyph: "wave", url: "#" },
-  { name: "Gipfelsturm Sport", tier: "Co-Sponsor", glyph: "puck", url: "#" },
-  { name: "Seerose Druck & Media", tier: "Co-Sponsor", glyph: "hex", url: "#" },
-
-  // Supporter
-  { name: "Café Anker", tier: "Supporter", glyph: "flame", url: "#" },
-  { name: "Pizzeria da Marco", tier: "Supporter", glyph: "flame", url: "#" },
-  { name: "Coiffure Welle", tier: "Supporter", glyph: "wave", url: "#" },
-  { name: "Blumen Lindenhof", tier: "Supporter", glyph: "leaf", url: "#" },
-  { name: "Velo Wyss", tier: "Supporter", glyph: "gear", url: "#" },
-  { name: "Metzgerei Bachmann", tier: "Supporter", glyph: "anchor", url: "#" },
-  { name: "Bau & Kran Meier AG", tier: "Supporter", glyph: "crane", url: "#" },
-  { name: "Restaurant Seeblick", tier: "Supporter", glyph: "anchor", url: "#" },
+  { name: "die Mobiliar", logo: "/sponsors/mobiliar.png", logoInk: "light" },
+  { name: "Quadrik Asset Management AG", logo: "/sponsors/quadrik.png", logoInk: "light" },
+  { name: "Teximp", logo: "/sponsors/teximp.png", logoInk: "dark" },
+  { name: "MRI Medizinisch Radiologisches Institut", logo: "/sponsors/mri.png", logoInk: "light" },
+  { name: "Frauenpraxis Küsnacht", logo: "/sponsors/frauenpraxis.png", logoInk: "light" },
+  { name: "Villa Trasqua", logo: "/sponsors/trasqua.png", logoInk: "light" },
+  { name: "IN", logo: "/sponsors/in.png", logoInk: "light" },
 ];
 
 export const sponsorTiers: SponsorTier[] = ["Hauptsponsor", "Co-Sponsor", "Supporter"];

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { sponsors } from "@/lib/data";
-import { SponsorLogo } from "./SponsorMark";
+import { SponsorTile } from "./SponsorTile";
 
 export function SponsorStrip() {
-  // Feature the top two tiers in the strip
+  // Supporters stay off the strip; everything else runs in the marquee.
   const featured = sponsors.filter((s) => s.tier !== "Supporter");
   const loop = featured.length ? [...featured, ...featured] : [];
 
@@ -21,14 +21,9 @@ export function SponsorStrip() {
       <div className="marquee relative mt-8 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
         <div className="marquee-track gap-12 px-6">
           {loop.map((s, i) => (
-            <Link
-              key={`${s.name}-${i}`}
-              href={s.url}
-              className="shrink-0 text-navy/55 transition-colors duration-300 hover:text-navy"
-              aria-label={s.name}
-            >
-              <SponsorLogo sponsor={s} size="md" />
-            </Link>
+            <span key={`${s.name}-${i}`} className="w-44 shrink-0 sm:w-52">
+              <SponsorTile sponsor={s} size="sm" />
+            </span>
           ))}
         </div>
       </div>
