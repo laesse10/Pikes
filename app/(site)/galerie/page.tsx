@@ -50,14 +50,6 @@ export default function GalleryPage() {
               );
             })}
           </div>
-
-          <p className="mt-8 text-center text-sm text-navy/50">
-            Mehr Bilder findest du auf unserem{" "}
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="link-underline font-medium text-navy">
-              Instagram-Kanal
-            </a>
-            .
-          </p>
         </div>
       </section>
     </>

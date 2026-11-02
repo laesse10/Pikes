@@ -75,11 +75,10 @@ export default function DatenschutzPage() {
             <h2>6. Externe Inhalte und Links</h2>
             <p>
               Auf unserer Website finden sich Links zu externen Websites (z.&nbsp;B. Sponsoren,
-              Social Media, ZEP). Beim Anklicken gelangst du auf Seiten Dritter, für deren
+              ZEP). Beim Anklicken gelangst du auf Seiten Dritter, für deren
               Datenbearbeitung die jeweiligen Anbieter verantwortlich sind.
             </p>
             <ul>
-              <li>Instagram / Facebook (Meta Platforms Ireland Ltd.)</li>
               <li>ZEP – Zürcher Eishockey Plauschliga (<a href={club.leagueUrl} target="_blank" rel="noopener noreferrer">zep.ch</a>)</li>
             </ul>
 

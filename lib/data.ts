@@ -19,10 +19,6 @@ export const club = {
   phone: "+41 44 000 00 00",
   region: "Zürichsee, Kanton Zürich",
   colors: ["Navy", "Crème", "Oliv"],
-  social: {
-    instagram: "https://instagram.com",
-    facebook: "https://facebook.com",
-  },
 } as const;
 
 /** Mannschaftsfoto: Datei in /public ablegen und den Pfad hier eintragen. */

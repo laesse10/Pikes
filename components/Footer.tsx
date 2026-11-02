@@ -21,32 +21,6 @@ export function Footer() {
             </a>
             .
           </p>
-          <div className="mt-6 flex gap-3">
-            <a
-              href={club.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="grid h-10 w-10 place-items-center rounded-full ring-1 ring-cream/20 transition-colors hover:bg-cream hover:text-navy-900"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6}>
-                <rect x="3" y="3" width="18" height="18" rx="5" />
-                <circle cx="12" cy="12" r="4" />
-                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-              </svg>
-            </a>
-            <a
-              href={club.social.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="grid h-10 w-10 place-items-center rounded-full ring-1 ring-cream/20 transition-colors hover:bg-cream hover:text-navy-900"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M13.5 21v-7h2.4l.4-2.9h-2.8V9.2c0-.84.26-1.42 1.47-1.42h1.43V5.18c-.7-.07-1.4-.1-2.1-.1-2.1 0-3.5 1.27-3.5 3.6v2.02H8.5V14h2.2v7h2.8Z" />
-              </svg>
-            </a>
-          </div>
         </div>
 
         <nav className="md:col-span-3">
