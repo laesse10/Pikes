@@ -153,10 +153,20 @@ export const fixtures: Fixture[] = [
   { id: "g2627-12", date: "2027-03-12T21:30:00+01:00", opponent: "SC Blue Eagles", isHome: false, venue: "Eishalle Wetzikon", competition: "Gruppe D" },
 ];
 
+/**
+ * Scores kept in code while the Blob store is suspended (Hobby limit, back on
+ * 02.12.2026). Scores saved in the admin take precedence over these.
+ */
+export const fallbackResults: Record<string, Result> = {
+  "g2627-01": { gf: 7, ga: 6 }, // Pikes – Horgner Dolphins 7:6
+  "g2627-02": { gf: 4, ga: 1 }, // Pikes – EHC Züri Devils 4:1
+};
+
 /** Merge the stored scores onto the static schedule. */
 export function toGames(results: Record<string, Result>, list: Fixture[] = fixtures): Game[] {
+  const merged = { ...fallbackResults, ...results };
   return list.map((f) => {
-    const result = results[f.id];
+    const result = merged[f.id];
     return { ...f, result, status: result ? "final" : "upcoming" };
   });
 }
