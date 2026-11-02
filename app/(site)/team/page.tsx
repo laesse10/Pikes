@@ -4,11 +4,11 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 import { PlayerPortrait } from "@/components/Placeholder";
 import { Photo } from "@/components/Photo";
-import { historyIntro, historyText, roster, staff, milestones, teamPhotoUrl, type Position, type Player } from "@/lib/data";
+import { historyIntro, historyText, roster, milestones, teamPhotoUrl, type Position, type Player } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Team",
-  description: "Der Kader der Zürisee Pikes: Torhüter, Verteidigung, Sturm sowie Trainerstaff und die Vereinsgeschichte.",
+  description: "Der Kader der Zürisee Pikes: Torhüter, Verteidigung, Sturm und die Vereinsgeschichte.",
 };
 
 type Tone = "navy" | "olive" | "cream";
@@ -76,7 +76,7 @@ export default function TeamPage() {
       <PageHero
         eyebrow="Der Kader"
         title="Unser Team"
-        intro={`${roster.length} Spieler, ein Staff und eine volle Garderobe. Lerne die Cracks kennen, die für die Pikes aufs Eis gehen – plus die Köpfe hinter der Bande.`}
+        intro={`${roster.length} Spieler und eine volle Garderobe. Lerne die Cracks kennen, die für die Pikes aufs Eis gehen.`}
       />
 
       {/* Team photo */}
@@ -117,29 +117,6 @@ export default function TeamPage() {
               </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* Staff */}
-      <section className="ice-grid border-y border-navy/10 py-20">
-        <div className="shell container-px">
-          <SectionHeading eyebrow="Hinter der Bande" title="Trainer & Staff" />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {staff.map((s, i) => (
-              <Reveal key={s.name} delay={i * 70}>
-                <div className="card flex items-center gap-4 rounded p-5">
-                  <span className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-navy font-display text-lg font-bold text-cream">
-                    {s.name.split(" ").map((p) => p.replace(/[«»]/g, "")[0]).slice(0, 2).join("")}
-                  </span>
-                  <div>
-                    <h3 className="font-display text-lg font-bold uppercase leading-tight text-navy">{s.name}</h3>
-                    <p className="text-xs uppercase tracking-[0.12em] text-olive">{s.role}</p>
-                    {s.note && <p className="mt-1 text-xs text-navy/55">{s.note}</p>}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 

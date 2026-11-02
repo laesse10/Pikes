@@ -91,20 +91,6 @@ export const roster: Player[] = [
   { number: "90", name: "Colin Rieffel" },
 ];
 
-export type Staff = {
-  name: string;
-  role: string;
-  note?: string;
-};
-
-export const staff: Staff[] = [
-  { name: "Andreas «Sege» Seger", role: "Head Coach", note: "Seit 2018 an der Bande" },
-  { name: "Martin Egli", role: "Assistenztrainer" },
-  { name: "Philipp Brunner", role: "Goalie-Coach" },
-  { name: "Sandra Lüthi", role: "Teammanagerin" },
-  { name: "Bruno Hafner", role: "Materialwart", note: "Hält die Kufen scharf" },
-];
-
 // ------------------------------------------------------------
 // Club history
 // ------------------------------------------------------------
@@ -157,13 +143,13 @@ export const fixtures: Fixture[] = [
   { id: "g2627-02", date: "2026-11-01T08:00:00+01:00", opponent: "EHC Züri Devils", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
   { id: "g2627-03", date: "2026-11-29T15:00:00+01:00", opponent: "Horgner Dolphins", isHome: false, venue: "Trainingshalle od. Arena Zug", competition: "Gruppe D" },
   { id: "g2627-04", date: "2026-12-13T07:45:00+01:00", opponent: "Cat Lake City Flyers", isHome: false, venue: "Eishalle Neudorf Oerlikon", competition: "Gruppe D" },
+  { id: "g2627-06", date: "2026-12-18T20:30:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: false, venue: "Eishalle Dübendorf", competition: "Gruppe D" },
   { id: "g2627-05", date: "2027-01-03T08:00:00+01:00", opponent: "Cat Lake City Flyers", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
-  { id: "g2627-06", date: "2027-01-15T20:30:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: false, venue: "Eishalle Dübendorf", competition: "Gruppe D" },
   { id: "g2627-07", date: "2027-01-16T19:15:00+01:00", opponent: "The Pinguins", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
   { id: "g2627-08", date: "2027-01-30T19:15:00+01:00", opponent: "EHC Blau-Weiss Dübendorf", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
   { id: "g2627-09", date: "2027-01-31T17:00:00+01:00", opponent: "EHC Züri Devils", isHome: false, venue: "Eishalle Wetzikon", competition: "Gruppe D" },
   { id: "g2627-10", date: "2027-02-07T20:00:00+01:00", opponent: "The Pinguins", isHome: false, venue: "Kunsteisbahn Urdorf", competition: "Gruppe D" },
-  { id: "g2627-11", date: "2027-02-20T16:15:00+01:00", opponent: "SC Blue Eagles", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
+  { id: "g2627-11", date: "2027-02-20T19:15:00+01:00", opponent: "SC Blue Eagles", isHome: true, venue: "Kunsteisbahn Küsnacht", competition: "Gruppe D" },
   { id: "g2627-12", date: "2027-03-12T21:30:00+01:00", opponent: "SC Blue Eagles", isHome: false, venue: "Eishalle Wetzikon", competition: "Gruppe D" },
 ];
 
