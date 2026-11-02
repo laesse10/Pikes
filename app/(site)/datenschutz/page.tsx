@@ -46,15 +46,12 @@ export default function DatenschutzPage() {
             <p>
               Wenn du uns über das Kontaktformular eine Anfrage zukommen lässt, werden deine
               Angaben aus dem Formular (z.&nbsp;B. Name, E-Mail-Adresse, Telefonnummer, Nachricht)
-              zwecks Bearbeitung der Anfrage bei uns gespeichert. Diese Daten geben wir nicht ohne
-              deine Einwilligung weiter. Die Daten werden gelöscht, sobald sie für die
-              Zweckerreichung nicht mehr erforderlich sind.
-            </p>
-            <p>
-              <em>
-                Hinweis: Diese Website ist eine Demonstration. Das Kontaktformular versendet keine
-                Daten und speichert keine Eingaben.
-              </em>
+              per E-Mail an uns übermittelt und zwecks Bearbeitung der Anfrage bei uns gespeichert.
+              Für den Versand nutzen wir den E-Mail-Dienst Resend (Resend, Inc., USA). Zum Schutz
+              vor Spam speichern wir eine pseudonymisierte (gehashte) Form deiner IP-Adresse für
+              eine Stunde bei Upstash (Upstash, Inc.). Diese Daten geben wir nicht ohne deine
+              Einwilligung weiter. Die Daten werden gelöscht, sobald sie für die Zweckerreichung
+              nicht mehr erforderlich sind.
             </p>
 
             <h2>4. Server-Logfiles &amp; Hosting</h2>

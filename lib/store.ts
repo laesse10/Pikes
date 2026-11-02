@@ -1,9 +1,10 @@
 import "server-only";
 import { cache } from "react";
-import { Redis } from "@upstash/redis";
+import type { Redis } from "@upstash/redis";
 import { revalidatePath, unstable_cache, updateTag } from "next/cache";
 import { normalizeResults, emptyResults, type ResultsDoc } from "./content";
 import type { Result } from "./data";
+import { redis } from "./redis";
 
 // Scores live in Upstash Redis (Vercel Marketplace): one hash, field = fixture
 // id, value = that game's score. Saving a game writes only its own field, so
@@ -15,18 +16,6 @@ const UPDATED_KEY = "pikes:results:updatedAt";
 // view doesn't cost a Redis call. The TTL is only a safety net.
 const CONTENT_TAG = "results";
 const CONTENT_TTL_SECONDS = 3600;
-
-let client: Redis | null | undefined;
-
-/** The Redis client, or null where no store is connected (e.g. a fresh clone). */
-function redis(): Redis | null {
-  if (client === undefined) {
-    const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-    const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
-    client = url && token ? Redis.fromEnv() : null;
-  }
-  return client;
-}
 
 /**
  * Read every score. Errors are thrown, not swallowed: a failed refresh then
