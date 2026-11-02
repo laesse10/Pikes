@@ -8,7 +8,7 @@
 export const club = {
   name: "Zürisee Pikes",
   shortName: "Pikes",
-  tagline: "Eishockey vom Zürichsee",
+  tagline: "Hockey mit Biss",
   league: "ZEP – Zürcher Eishockey Plauschliga",
   leagueUrl: "https://www.zep.ch/",
   division: "Gruppe D",
