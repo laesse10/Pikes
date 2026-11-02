@@ -95,7 +95,7 @@ export const roster: Player[] = [
 // Club history
 // ------------------------------------------------------------
 export const historyIntro =
-  "Die Zürisee Pikes wurden 2026 von einer Handvoll eishockeyverrückter Freunde aus der Region Zürichsee gegründet – an einem Stammtisch in Stäfa, bei dem mehr über Bullys als über Bier diskutiert wurde. Der Name war schnell gefunden: Der Hecht («Pike») ist der König des Sees – schnell, wendig und mit ordentlich Biss. Genau so wollten wir Eishockey spielen.";
+  "Die Zürisee Pikes wurden 2026 von einer Handvoll eishockeyverrückter Freunde aus der Region Zürichsee gegründet. Der Name war schnell gefunden: Der Hecht («Pike») ist der König des Sees – schnell, wendig und mit ordentlich Biss. Genau so wollten wir Eishockey spielen.";
 
 export const historyText =
   "Aus dem losen Plauschteam wurde ein fester Verein in der Zürcher Eishockey Plauschliga (ZEP). Wir starteten zuunterst und lernen in jeder Saison dazu. Heute spielen wir in der Gruppe D – aber wichtiger als jede Tabelle ist, dass nach dem Schlusspfiff alle gemeinsam in der Garderobe sitzen. Fairplay, Kameradschaft und Freude am Spiel stehen bei uns über dem Resultat.";
@@ -103,7 +103,7 @@ export const historyText =
 export type Milestone = { year: string; title: string; text: string };
 
 export const milestones: Milestone[] = [
-  { year: "2026", title: "Die Gründung", text: "Eine Handvoll eishockeyverrückter Freunde gründet die Zürisee Pikes – an einem Stammtisch in Stäfa." },
+  { year: "2026", title: "Die Gründung", text: "Eine Handvoll eishockeyverrückter Freunde gründet die Zürisee Pikes" },
   { year: "2026", title: "Logo & Name", text: "Der Hecht («Pike») wird zum Wappentier: schnell, wendig und mit ordentlich Biss. Das Emblem ist geboren." },
   { year: "2026", title: "Erstes Eistraining", text: "Premiere auf dem Eis der Kunsteisbahn Küsnacht – die ersten Schlittschuhe werden geschnürt." },
   { year: "2026", title: "Aufnahme in die ZEP", text: "Die Pikes werden in die Zürcher Eishockey Plauschliga aufgenommen." },
