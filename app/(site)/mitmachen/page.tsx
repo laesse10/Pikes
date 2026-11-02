@@ -87,10 +87,6 @@ export default function JoinPage() {
                   <a href={`mailto:${club.email}`} className="link-underline font-medium text-navy">{club.email}</a>
                 </li>
                 <li>
-                  <span className="block text-xs uppercase tracking-[0.12em] text-navy/45">Telefon</span>
-                  <a href={`tel:${club.phone.replace(/\s/g, "")}`} className="link-underline font-medium text-navy">{club.phone}</a>
-                </li>
-                <li>
                   <span className="block text-xs uppercase tracking-[0.12em] text-navy/45">Heimeis</span>
                   <span className="font-medium text-navy">{club.homeRink}</span>
                   <span className="block text-navy/60">{club.homeRinkAddress}</span>

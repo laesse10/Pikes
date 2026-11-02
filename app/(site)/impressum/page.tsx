@@ -36,8 +36,6 @@ export default function ImpressumPage() {
             <p>
               E-Mail: <a href={`mailto:${club.email}`}>{club.email}</a>
               <br />
-              Telefon: {club.phone}
-              <br />
               Web: www.zueriseepikes.ch
             </p>
 

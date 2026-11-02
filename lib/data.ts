@@ -16,7 +16,6 @@ export const club = {
   homeRink: "Kunsteisbahn Küsnacht (KEK)",
   homeRinkAddress: "Johannisburgstrasse 22, 8700 Küsnacht ZH",
   email: "info@zueriseepikes.ch",
-  phone: "+41 44 000 00 00",
   region: "Zürichsee, Kanton Zürich",
   colors: ["Navy", "Crème", "Oliv"],
 } as const;
