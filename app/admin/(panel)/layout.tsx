@@ -37,7 +37,7 @@ export default function PanelLayout({ children }: { children: React.ReactNode })
 
       {!configured && (
         <div className="border-b border-amber-300 bg-amber-50 px-4 py-3 text-center text-sm text-amber-900">
-          ⚠️ Kein Blob-Speicher erkannt (<code>BLOB_READ_WRITE_TOKEN</code> fehlt). Änderungen können nicht gespeichert werden.
+          ⚠️ Kein Speicher verbunden (<code>KV_REST_API_URL</code> / <code>KV_REST_API_TOKEN</code> fehlen). Resultate können nicht gespeichert werden.
         </div>
       )}
 

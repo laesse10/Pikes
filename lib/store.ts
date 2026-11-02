@@ -1,56 +1,56 @@
 import "server-only";
 import { cache } from "react";
-import { put, list, del } from "@vercel/blob";
-import { revalidatePath, revalidateTag, unstable_cache } from "next/cache";
+import { Redis } from "@upstash/redis";
+import { revalidatePath, unstable_cache, updateTag } from "next/cache";
 import { normalizeResults, emptyResults, type ResultsDoc } from "./content";
 import type { Result } from "./data";
 
-// Blob bills list() and put() as *advanced* operations, and the Hobby
-// allowance for those is small (2k/month). Reading through on every request
-// once exhausted it and suspended the store, so public reads go through the
-// cache below and are invalidated on save; only the admin reads through.
+// Scores live in Upstash Redis (Vercel Marketplace): one hash, field = fixture
+// id, value = that game's score. Saving a game writes only its own field, so
+// two people saving different games at once can't overwrite each other.
+const RESULTS_KEY = "pikes:results";
+const UPDATED_KEY = "pikes:results:updatedAt";
+
+// Public pages read through this cache, which every save expires, so a page
+// view doesn't cost a Redis call. The TTL is only a safety net.
 const CONTENT_TAG = "results";
 const CONTENT_TTL_SECONDS = 3600;
 
-// Each save writes a NEW immutable blob (never overwrite). Overwriting the same
-// pathname on Vercel Blob is only eventually consistent — the CDN serves stale
-// content for a while. Reading the newest object via the (strongly consistent)
-// list() metadata API gives immediate read-after-write consistency.
-const RESULTS_PREFIX = "results/doc-";
+let client: Redis | null | undefined;
 
-function hasBlob() {
-  return !!process.env.BLOB_READ_WRITE_TOKEN;
-}
-
-async function listVersions() {
-  const { blobs } = await list({ prefix: RESULTS_PREFIX });
-  return blobs.sort((a, b) => +new Date(b.uploadedAt) - +new Date(a.uploadedAt));
-}
-
-/** Read the newest results document. Falls back to "no scores yet". */
-async function readResultsRaw(): Promise<ResultsDoc> {
-  if (!hasBlob()) return emptyResults();
-  try {
-    const versions = await listVersions();
-    if (versions.length === 0) return emptyResults();
-    const res = await fetch(versions[0].url, { cache: "no-store" });
-    if (!res.ok) return emptyResults();
-    return normalizeResults(await res.json());
-  } catch {
-    // Nothing saved yet, or the store is unreachable -> no scores.
-    return emptyResults();
+/** The Redis client, or null where no store is connected (e.g. a fresh clone). */
+function redis(): Redis | null {
+  if (client === undefined) {
+    const url = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+    client = url && token ? Redis.fromEnv() : null;
   }
+  return client;
 }
 
-// Cached across requests and invalidated on save, so a busy day costs a
-// handful of Blob operations instead of one per page view. The TTL is only a
-// safety net for the case where tag invalidation is missed.
-const readResultsCached = unstable_cache(readResultsRaw, ["results-doc"], {
+/**
+ * Read every score. Errors are thrown, not swallowed: a failed refresh then
+ * keeps serving the last good page instead of caching "no scores".
+ */
+async function readResultsRaw(): Promise<ResultsDoc> {
+  const db = redis();
+  if (!db) return emptyResults();
+  const [results, updatedAt] = await Promise.all([
+    db.hgetall<Record<string, unknown>>(RESULTS_KEY),
+    db.get<string>(UPDATED_KEY),
+  ]);
+  return {
+    results: normalizeResults(results),
+    updatedAt: typeof updatedAt === "string" ? updatedAt : emptyResults().updatedAt,
+  };
+}
+
+const readResultsCached = unstable_cache(readResultsRaw, ["results-redis"], {
   tags: [CONTENT_TAG],
   revalidate: CONTENT_TTL_SECONDS,
 });
 
-/** Read for public pages. Cached; the admin busts the tag whenever it saves. */
+/** Read for public pages. Cached; every save expires it. */
 export const getResults = cache(async (): Promise<Record<string, Result>> => {
   return (await readResultsCached()).results;
 });
@@ -60,44 +60,37 @@ export async function getResultsFresh(): Promise<ResultsDoc> {
   return readResultsRaw();
 }
 
-async function saveResults(doc: ResultsDoc): Promise<void> {
-  if (!hasBlob()) throw new Error("Kein Blob-Speicher konfiguriert (BLOB_READ_WRITE_TOKEN fehlt).");
-  const next = { ...doc, updatedAt: new Date().toISOString() };
-  const name = `${RESULTS_PREFIX}${Date.now()}-${Math.random().toString(36).slice(2)}.json`;
-  await put(name, JSON.stringify(next, null, 2), {
-    access: "public",
-    addRandomSuffix: false,
-    contentType: "application/json",
-    cacheControlMaxAge: 0,
-  });
-  // Drop the cached document and every rendered route that shows a score.
-  revalidateTag(CONTENT_TAG, "max");
-  revalidatePath("/", "layout");
-  // Prune old versions, keeping a few recent ones as backup. del() is free;
-  // the list() it needs is not, so this only runs when there is enough to
-  // make it worth an operation.
-  try {
-    const versions = await listVersions();
-    const stale = versions.slice(5);
-    if (stale.length) await del(stale.map((b) => b.url));
-  } catch {
-    // pruning is best-effort
-  }
+function requireRedis(): Redis {
+  const db = redis();
+  if (!db) throw new Error("Kein Speicher verbunden (KV_REST_API_URL / KV_REST_API_TOKEN fehlen).");
+  return db;
 }
 
-/** Record the score of one game. */
+/** Expire the cached scores and every rendered page that shows one. */
+function publish() {
+  updateTag(CONTENT_TAG);
+  revalidatePath("/", "layout");
+}
+
+/** Record the score of one game, with its goal scorers. */
 export async function setResult(fixtureId: string, result: Result): Promise<void> {
-  const doc = await readResultsRaw();
-  await saveResults({ ...doc, results: { ...doc.results, [fixtureId]: result } });
+  await requireRedis()
+    .multi()
+    .hset(RESULTS_KEY, { [fixtureId]: result })
+    .set(UPDATED_KEY, new Date().toISOString())
+    .exec();
+  publish();
 }
 
 /** Remove a score, putting the game back to "upcoming". */
 export async function clearResult(fixtureId: string): Promise<void> {
-  const doc = await readResultsRaw();
-  if (!(fixtureId in doc.results)) return;
-  const results = { ...doc.results };
-  delete results[fixtureId];
-  await saveResults({ ...doc, results });
+  await requireRedis()
+    .multi()
+    .hdel(RESULTS_KEY, fixtureId)
+    .set(UPDATED_KEY, new Date().toISOString())
+    .exec();
+  publish();
 }
 
-export const STORE_CONFIGURED = hasBlob;
+/** Whether a Redis store is connected; the admin warns when it isn't. */
+export const STORE_CONFIGURED = () => redis() !== null;

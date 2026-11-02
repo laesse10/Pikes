@@ -1,14 +1,17 @@
 import { getResultsFresh } from "@/lib/store";
-import { fixtures, formatDate, toGames } from "@/lib/data";
+import { fixtures, roster, formatDate, toGames } from "@/lib/data";
 import { saveResultAction, clearResultAction } from "@/app/admin/actions";
 import { SubmitButton } from "@/components/admin/SubmitButton";
 import { TeamLogo } from "@/components/TeamLogo";
-import { fieldInput, fieldLabel } from "@/components/admin/styles";
+import { ResultForm } from "@/components/admin/ResultForm";
 
 const ERRORS: Record<string, string> = {
   invalid: "Bitte für beide Teams eine Torzahl zwischen 0 und 99 eintragen.",
   unknown: "Dieses Spiel steht nicht im Spielplan.",
+  scorer: "Ein Torschütze steht nicht im Kader.",
 };
+
+const players = roster.map(({ number, name }) => ({ number, name }));
 
 export default async function AdminResults({
   searchParams,
@@ -24,7 +27,7 @@ export default async function AdminResults({
     <div>
       <h1 className="text-3xl uppercase text-navy">Resultate</h1>
       <p className="mt-2 max-w-2xl text-sm text-navy/60">
-        Trage nach jedem Spiel das Schlussresultat ein. Alles andere auf der Website – Spielplan,
+        Trage nach jedem Spiel das Schlussresultat und die Torschützen der Pikes ein. Alles andere auf der Website – Spielplan,
         Kader, Sponsoren, Galerie – ist fest im Code hinterlegt und ändert sich nur per Deploy.
       </p>
 
@@ -50,7 +53,7 @@ export default async function AdminResults({
             hour: "2-digit", minute: "2-digit",
           });
           return (
-            <section key={g.id} className="card rounded-lg p-4 sm:p-5">
+            <section key={g.id} id={g.id} className="card scroll-mt-20 rounded-lg p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
                 <TeamLogo team={g.opponent} size={36} />
 
@@ -63,39 +66,6 @@ export default async function AdminResults({
                   </p>
                 </div>
 
-                <form action={saveResultAction} className="flex items-end gap-2">
-                  <input type="hidden" name="id" value={g.id} />
-                  <div className="w-20">
-                    <label className={fieldLabel} htmlFor={`gf-${g.id}`}>Pikes</label>
-                    <input
-                      id={`gf-${g.id}`}
-                      type="number"
-                      name="gf"
-                      min={0}
-                      max={99}
-                      required
-                      defaultValue={g.result?.gf ?? ""}
-                      placeholder="–"
-                      className={fieldInput}
-                    />
-                  </div>
-                  <div className="w-20">
-                    <label className={fieldLabel} htmlFor={`ga-${g.id}`}>Gegner</label>
-                    <input
-                      id={`ga-${g.id}`}
-                      type="number"
-                      name="ga"
-                      min={0}
-                      max={99}
-                      required
-                      defaultValue={g.result?.ga ?? ""}
-                      placeholder="–"
-                      className={fieldInput}
-                    />
-                  </div>
-                  <SubmitButton variant="olive">Speichern</SubmitButton>
-                </form>
-
                 {g.result && (
                   <form action={clearResultAction}>
                     <input type="hidden" name="id" value={g.id} />
@@ -105,6 +75,17 @@ export default async function AdminResults({
                   </form>
                 )}
               </div>
+
+              <ResultForm
+                // Remount when the stored score changes, so a reset clears the inputs.
+                key={JSON.stringify(g.result ?? null)}
+                id={g.id}
+                gf={g.result?.gf}
+                ga={g.result?.ga}
+                goals={g.result?.goals}
+                players={players}
+                action={saveResultAction}
+              />
             </section>
           );
         })}

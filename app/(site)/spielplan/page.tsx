@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { ResultPill } from "@/components/ResultPill";
 import { TeamLogo } from "@/components/TeamLogo";
-import { club, toGames, formatDate, type Game, type Competition } from "@/lib/data";
+import { club, toGames, formatDate, gameHref, type Game, type Competition } from "@/lib/data";
 import { getResults } from "@/lib/store";
 
 export const metadata: Metadata = {
@@ -16,7 +17,10 @@ function FixtureRow({ f }: { f: Game }) {
   const upcoming = f.status === "upcoming";
   const time = new Intl.DateTimeFormat("de-CH", { timeZone: "Europe/Zurich", hour: "2-digit", minute: "2-digit" }).format(new Date(f.date));
   return (
-    <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-3.5 transition-colors hover:bg-cream-soft sm:grid-cols-[7.5rem_1fr_auto] sm:px-6">
+    <Link
+      href={gameHref(f.id)}
+      className="group grid grid-cols-[auto_1fr_auto] items-center gap-4 px-4 py-3.5 transition-colors hover:bg-cream-soft focus-visible:bg-cream-soft focus-visible:outline-none sm:grid-cols-[7.5rem_1fr_auto] sm:px-6"
+    >
       {/* Date */}
       <div className="leading-tight">
         <p className="font-stat text-sm font-semibold text-navy tabular">
@@ -46,7 +50,10 @@ function FixtureRow({ f }: { f: Game }) {
         {upcoming ? (
           <span className="font-stat text-base font-semibold text-navy/70 tabular sm:hidden">{time}</span>
         ) : (
-          <ResultPill game={f} withScore />
+          <span className="inline-flex items-center gap-2">
+            <ResultPill game={f} withScore />
+            <span aria-hidden className="text-navy/30 transition-transform group-hover:translate-x-0.5">›</span>
+          </span>
         )}
         {upcoming && (
           <span className="hidden rounded-full bg-navy/5 px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-wide text-navy/60 sm:inline-block">
@@ -54,7 +61,7 @@ function FixtureRow({ f }: { f: Game }) {
           </span>
         )}
       </div>
-    </div>
+    </Link>
   );
 }
 

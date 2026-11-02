@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
+import { fixtures, gameHref } from "@/lib/data";
 
 const base = "https://www.zueriseepikes.ch";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/team", "/spielplan", "/sponsoren", "/galerie", "/mitmachen", "/impressum", "/datenschutz"];
+  const routes = [
+    "", "/team", "/spielplan", "/sponsoren", "/galerie", "/mitmachen", "/impressum", "/datenschutz",
+    ...fixtures.map((f) => gameHref(f.id)),
+  ];
   const now = new Date();
 
   return routes.map((route) => ({

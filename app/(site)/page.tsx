@@ -17,6 +17,7 @@ import {
   latestResult,
   formatDayTime,
   formatDate,
+  gameHref,
 } from "@/lib/data";
 import { getResults } from "@/lib/store";
 
@@ -144,9 +145,9 @@ export default async function Home() {
             <div className="flex items-center gap-4">
               <span className="eyebrow text-cream-soft/80">Letztes Resultat</span>
               <span className="hidden h-4 w-px bg-cream-soft/30 sm:block" />
-              <span className="font-display text-base uppercase">
+              <Link href={gameHref(last.id)} className="link-underline font-display text-base uppercase">
                 Pikes {last.isHome ? "vs" : "@"} {last.opponent}
-              </span>
+              </Link>
             </div>
             <div className="flex items-center gap-4">
               <ResultPill game={last} withScore />

@@ -10,7 +10,7 @@ import {
   sessionCookieOptions,
 } from "@/lib/auth";
 import { setResult, clearResult } from "@/lib/store";
-import { fixtures } from "@/lib/data";
+import { fixtures, roster, type Result } from "@/lib/data";
 
 // ---------------------------------------------------------------- auth guard
 async function assertAuthed() {
@@ -24,7 +24,7 @@ function str(fd: FormData, key: string): string {
   return ((fd.get(key) as string) ?? "").trim();
 }
 
-function goals(fd: FormData, key: string): number | undefined {
+function count(fd: FormData, key: string): number | undefined {
   const v = str(fd, key);
   if (v === "") return undefined;
   const n = Number(v);
@@ -60,14 +60,19 @@ export async function saveResultAction(fd: FormData) {
   // The schedule is static, so only ids that actually exist may be written.
   if (!fixtures.some((f) => f.id === id)) redirect("/admin?error=unknown");
 
-  const gf = goals(fd, "gf");
-  const ga = goals(fd, "ga");
-  if (gf === undefined || ga === undefined) {
-    redirect("/admin?error=invalid");
-  } else {
-    await setResult(id, { gf, ga });
-    redirect("/admin?ok=1");
-  }
+  const gf = count(fd, "gf");
+  const ga = count(fd, "ga");
+  if (gf === undefined || ga === undefined) redirect(`/admin?error=invalid#${id}`);
+
+  // One select per Pikes goal, in order; an empty value means "not known".
+  const players = new Set(roster.map((p) => p.name));
+  const scorers = fd.getAll("scorer").slice(0, gf).map((v) => String(v).trim());
+  if (scorers.some((name) => name && !players.has(name))) redirect(`/admin?error=scorer#${id}`);
+
+  const result: Result = { gf, ga };
+  if (scorers.some(Boolean)) result.goals = scorers.map((name) => (name ? { scorer: name } : {}));
+  await setResult(id, result);
+  redirect(`/admin?ok=1#${id}`);
 }
 
 export async function clearResultAction(fd: FormData) {
