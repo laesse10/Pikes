@@ -75,6 +75,11 @@ export default function DatenschutzPage() {
               ZEP). Beim Anklicken gelangst du auf Seiten Dritter, für deren
               Datenbearbeitung die jeweiligen Anbieter verantwortlich sind.
             </p>
+            <p>
+              Auf der Seite «Mitmachen» zeigen wir eine Karte von OpenStreetMap (OpenStreetMap
+              Foundation, Grossbritannien). Sobald die Karte geladen wird, wird deine IP-Adresse an
+              OpenStreetMap übermittelt. Es werden dabei keine Tracking-Cookies gesetzt.
+            </p>
             <ul>
               <li>ZEP – Zürcher Eishockey Plauschliga (<a href={club.leagueUrl} target="_blank" rel="noopener noreferrer">zep.ch</a>)</li>
             </ul>

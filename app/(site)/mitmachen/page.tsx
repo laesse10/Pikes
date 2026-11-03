@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { Placeholder } from "@/components/Placeholder";
+import { RinkMap } from "@/components/RinkMap";
 import { ContactForm } from "@/components/ContactForm";
 import { club } from "@/lib/data";
 
@@ -93,9 +93,7 @@ export default function JoinPage() {
                 </li>
               </ul>
             </div>
-            <div className="overflow-hidden rounded shadow-[var(--shadow-card)]">
-              <Placeholder tone="olive" ratio="4/3" label={club.homeRink} sublabel="Anfahrt & Karte" />
-            </div>
+            <RinkMap />
           </div>
         </div>
       </section>

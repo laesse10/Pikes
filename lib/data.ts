@@ -18,6 +18,8 @@ export const club = {
   founded: 2026,
   homeRink: "Kunsteisbahn Küsnacht (KEK)",
   homeRinkAddress: "Johannisburgstrasse 22, 8700 Küsnacht ZH",
+  // The rink itself as mapped in OpenStreetMap (ice_rink "Kunsteisbahn Küsnacht (KEK)").
+  homeRinkLocation: { lat: 47.32744, lon: 8.60662 },
   email: "info@zueriseepikes.ch",
   region: "Zürichsee, Kanton Zürich",
   colors: ["Navy", "Crème", "Oliv"],
