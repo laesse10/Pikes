@@ -17,6 +17,10 @@ import {
 // passed SPF, DKIM and DMARC but was silently dropped by iCloud, which hosts
 // the main domain's mailboxes; the subdomain isn't hosted there.
 const FROM = "Website Zürisee Pikes <formular@mail.zueriseepikes.ch>";
+// Where requests go. iCloud drops everything Resend sends to info@ (from the
+// main domain and the subdomain alike), so the inbox is set in Vercel as
+// CONTACT_TO; it stays out of this public repo.
+const TO = process.env.CONTACT_TO || club.email;
 const MAX_PER_HOUR = 5;
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 const UNAVAILABLE = `Die Nachricht konnte nicht gesendet werden. Bitte schreib uns direkt an ${club.email}.`;
@@ -95,7 +99,7 @@ export async function sendContactAction(_prev: ContactState, fd: FormData): Prom
 
   const { error } = await new Resend(apiKey).emails.send({
     from: FROM,
-    to: club.email,
+    to: TO,
     replyTo: fields.email,
     subject: `Kontaktformular: ${fields.reason} – ${fields.name}`,
     text: mailBody(fields),
