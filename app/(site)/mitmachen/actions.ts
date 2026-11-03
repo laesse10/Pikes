@@ -13,8 +13,10 @@ import {
   type ContactState,
 } from "@/lib/contact";
 
-// Sent from our own domain (verified at Resend) so iCloud's DMARC check passes.
-const FROM = "Website Zürisee Pikes <website@zueriseepikes.ch>";
+// Sent from a subdomain verified at Resend. Mail from website@zueriseepikes.ch
+// passed SPF, DKIM and DMARC but was silently dropped by iCloud, which hosts
+// the main domain's mailboxes; the subdomain isn't hosted there.
+const FROM = "Website Zürisee Pikes <formular@mail.zueriseepikes.ch>";
 const MAX_PER_HOUR = 5;
 const EMAIL = /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/;
 const UNAVAILABLE = `Die Nachricht konnte nicht gesendet werden. Bitte schreib uns direkt an ${club.email}.`;
