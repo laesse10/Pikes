@@ -8,6 +8,12 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // 75 is the default; 85 keeps faces crisp on the team page's photo.
+    qualities: [75, 85],
+    // Next's defaults plus 2560, so a retina laptop isn't handed the 3840 version.
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 2560, 3840],
+  },
   async headers() {
     return [
       {

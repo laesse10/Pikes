@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 import { PlayerPortrait } from "@/components/Placeholder";
 import { Photo } from "@/components/Photo";
-import { historyIntro, historyText, roster, milestones, teamPhotoUrl, type Position, type Player } from "@/lib/data";
+import { historyIntro, historyText, roster, milestones, teamPhoto, teamPhotoFocus, type Position, type Player } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Team",
@@ -84,12 +84,14 @@ export default function TeamPage() {
         <div className="shell container-px">
           <Reveal className="overflow-hidden rounded shadow-[var(--shadow-lift)]">
             <Photo
-              url={teamPhotoUrl}
+              src={teamPhoto}
+              focus={teamPhotoFocus}
+              quality={85}
               alt="Mannschaftsfoto Zürisee Pikes"
               tone="navy"
               ratio="21/9"
               showLogo
-              priority
+              eager
               sizes="(min-width: 1280px) 1216px, 100vw"
               label="Mannschaftsfoto Saison 2026/27"
               sublabel="Platzhalter – euer offizielles Teambild kommt hierhin"

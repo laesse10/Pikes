@@ -11,7 +11,8 @@ import { TeamLogo } from "@/components/TeamLogo";
 import {
   club,
   roster,
-  teamPhotoUrl,
+  teamPhoto,
+  teamPhotoFocus,
   toGames,
   nextFixture,
   latestResult,
@@ -55,8 +56,17 @@ export default async function Home() {
       <section className="relative isolate flex min-h-[88vh] items-end overflow-hidden bg-navy-900 text-cream">
         {/* Background: team photo (uploaded) or branded gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-navy-800 via-navy-900 to-ink" />
-        {teamPhotoUrl && (
-          <Image src={teamPhotoUrl} alt="Mannschaftsfoto Zürisee Pikes" fill priority sizes="100vw" className="object-cover opacity-55" />
+        {teamPhoto && (
+          <Image
+            src={teamPhoto}
+            alt="Mannschaftsfoto Zürisee Pikes"
+            fill
+            preload
+            placeholder="blur"
+            sizes="100vw"
+            style={{ objectPosition: teamPhotoFocus }}
+            className="object-cover opacity-55"
+          />
         )}
         <div
           className="absolute inset-0 opacity-[0.08]"
@@ -64,13 +74,13 @@ export default async function Home() {
         />
         <div className="noise absolute inset-0" />
         {/* Emblem watermark (only without a real photo) */}
-        {!teamPhotoUrl && (
+        {!teamPhoto && (
           <div className="pointer-events-none absolute -right-20 top-1/2 hidden -translate-y-1/2 opacity-[0.12] md:block lg:opacity-20">
             <Image src="/logo.png" alt="" width={680} height={680} className="rotate-6" priority />
           </div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/55 to-navy-900/30" />
-        {!teamPhotoUrl && (
+        {!teamPhoto && (
           <span className="absolute right-4 top-24 z-10 rounded-full bg-cream/10 px-3 py-1 text-[0.6rem] uppercase tracking-[0.18em] text-cream/60 ring-1 ring-cream/15 md:right-6">
             Mannschaftsfoto · Platzhalter
           </span>
@@ -187,10 +197,11 @@ export default async function Home() {
             <div className="relative">
               <div className="overflow-hidden rounded shadow-[var(--shadow-lift)]">
                 <Photo
-                  url={teamPhotoUrl}
+                  src={teamPhoto}
                   alt="Mannschaftsfoto Zürisee Pikes"
                   tone="navy"
-                  ratio="4/5"
+                  // The photo is 4:3; a portrait crop would cut off the outer players.
+                  ratio={teamPhoto ? "4/3" : "4/5"}
                   showLogo
                   sizes="(min-width: 1024px) 40vw, 100vw"
                   label="Teamfoto Saison 2026/27"

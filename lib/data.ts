@@ -1,3 +1,6 @@
+import type { StaticImageData } from "next/image";
+import teamPhotoImage from "@/assets/mannschaftsfoto-2026-27.jpg";
+
 // ============================================================
 // Zürisee Pikes — all site content.
 // Everything here is static and ships with the build. The only thing
@@ -20,8 +23,15 @@ export const club = {
   colors: ["Navy", "Crème", "Oliv"],
 } as const;
 
-/** Mannschaftsfoto: Datei in /public ablegen und den Pfad hier eintragen. */
-export const teamPhotoUrl: string | undefined = undefined;
+/**
+ * Mannschaftsfoto. Statisch importiert, damit Next.js Grösse und eine
+ * Unschärfe-Vorschau kennt und für jeden Bildschirm eine passende WebP-Version
+ * ausliefert. Die Quelldatei ist auf 3200 px Breite verkleinert.
+ */
+export const teamPhoto: StaticImageData | undefined = teamPhotoImage;
+
+/** Bildausschnitt: die Mannschaft steht im unteren Teil des Bildes. */
+export const teamPhotoFocus = "50% 70%";
 
 export type NavItem = { label: string; href: string };
 
