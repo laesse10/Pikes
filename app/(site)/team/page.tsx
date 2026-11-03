@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
 import { PlayerPortrait } from "@/components/Placeholder";
 import { Photo } from "@/components/Photo";
+import jerseyFront from "@/assets/trikot-vorne.png";
+import jerseyBack from "@/assets/trikot-hinten.png";
 import { historyIntro, historyText, roster, milestones, teamPhoto, teamPhotoFocus, type Position, type Player } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -119,6 +123,47 @@ export default function TeamPage() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Jersey */}
+      <section className="ice-grid border-y border-navy/10 py-20">
+        <div className="shell container-px grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-4">
+            <SectionHeading
+              eyebrow="Saison 2026/27"
+              title="Unser Trikot"
+              intro="Oliv mit weissen Streifen, crèmefarbenem Kragen und dem Hecht auf der Brust."
+            />
+            <p className="mt-4 text-[0.95rem] leading-relaxed text-navy/70">
+              Auf dem Trikot tragen wir alle unsere Partner mit aufs Eis – von der Mobiliar auf der
+              Brust bis zu Teximp auf dem Rücken.{" "}
+              <Link href="/sponsoren" className="link-underline font-medium text-navy">
+                Unsere Sponsoren
+              </Link>
+            </p>
+          </div>
+          <div className="grid grid-cols-2 items-end gap-4 sm:gap-8 lg:col-span-8">
+            {[
+              { src: jerseyFront, label: "Vorderseite", alt: "Trikot der Zürisee Pikes, Vorderseite mit Hecht-Logo" },
+              { src: jerseyBack, label: "Rückseite", alt: "Trikot der Zürisee Pikes, Rückseite mit Name und Nummer" },
+            ].map((j, i) => (
+              <Reveal key={j.label} delay={i * 100}>
+                <figure>
+                  <Image
+                    src={j.src}
+                    alt={j.alt}
+                    placeholder="blur"
+                    sizes="(min-width: 1280px) 400px, (min-width: 1024px) 32vw, 50vw"
+                    className="h-auto w-full drop-shadow-[0_18px_24px_rgba(15,27,45,0.18)]"
+                  />
+                  <figcaption className="mt-3 text-center text-xs uppercase tracking-[0.18em] text-navy/50">
+                    {j.label}
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
