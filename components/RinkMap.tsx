@@ -9,30 +9,31 @@ const embedUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&l
 const googleUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lon}`;
 const appleUrl = `https://maps.apple.com/?daddr=${lat},${lon}&q=${encodeURIComponent(club.homeRink)}`;
 
-/** Map of the home rink with route links. */
+/** Map of the home rink. */
 export function RinkMap() {
   return (
-    <div className="card overflow-hidden rounded">
-      <div className="relative aspect-[4/3] bg-olive/15">
-        <iframe
-          title={`Karte: ${club.homeRink}`}
-          src={embedUrl}
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          className="absolute inset-0 h-full w-full border-0"
-        />
-      </div>
-      <div className="p-6">
-        <h3 className="font-display text-lg font-bold uppercase text-navy">Anfahrt</h3>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <a href={googleUrl} target="_blank" rel="noopener noreferrer" className="btn btn-olive !px-4 !py-2 text-xs">
-            Route in Google Maps
-          </a>
-          <a href={appleUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !px-4 !py-2 text-xs">
-            Apple Karten
-          </a>
-        </div>
-      </div>
+    <div className="card relative aspect-[4/3] overflow-hidden rounded bg-olive/15">
+      <iframe
+        title={`Karte: ${club.homeRink}`}
+        src={embedUrl}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        className="absolute inset-0 h-full w-full border-0"
+      />
+    </div>
+  );
+}
+
+/** Route to the home rink in Google Maps or Apple Maps (opens the app on phones). */
+export function RinkRouteLinks({ className = "" }: { className?: string }) {
+  return (
+    <div className={`flex flex-wrap gap-2 ${className}`}>
+      <a href={googleUrl} target="_blank" rel="noopener noreferrer" className="btn btn-olive !px-4 !py-2 text-xs">
+        Route in Google Maps
+      </a>
+      <a href={appleUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !px-4 !py-2 text-xs">
+        Apple Karten
+      </a>
     </div>
   );
 }

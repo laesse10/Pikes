@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { SectionHeading } from "@/components/SectionHeading";
 import { Reveal } from "@/components/Reveal";
-import { RinkMap } from "@/components/RinkMap";
+import { RinkMap, RinkRouteLinks } from "@/components/RinkMap";
 import { ContactForm } from "@/components/ContactForm";
 import { club } from "@/lib/data";
 
@@ -90,6 +90,7 @@ export default function JoinPage() {
                   <span className="block text-xs uppercase tracking-[0.12em] text-navy/45">Heimeis</span>
                   <span className="font-medium text-navy">{club.homeRink}</span>
                   <span className="block text-navy/60">{club.homeRinkAddress}</span>
+                  <RinkRouteLinks className="mt-3" />
                 </li>
               </ul>
             </div>
