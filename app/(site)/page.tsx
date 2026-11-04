@@ -110,7 +110,7 @@ export default async function Home() {
             <Reveal delay={240}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/spielplan" className="btn btn-olive">Spielplan & Resultate</Link>
-                <Link href="/mitmachen" className="btn btn-ghost">Mitspielen</Link>
+                <Link href="/mitmachen" className="btn btn-ghost">Warteliste</Link>
               </div>
             </Reveal>
           </div>
@@ -233,10 +233,10 @@ export default async function Home() {
             variant="light"
             eyebrow="Mitmachen"
             title="Lust auf Eishockey am See?"
-            intro="Egal ob Wiedereinsteiger oder erfahrener Crack – bei den Pikes ist jede:r willkommen, die Freude am Spiel und Teamgeist mitbringt. Komm zu einem Schnuppertraining vorbei."
+            intro="Unser Kader ist aktuell voll besetzt. Du möchtest trotzdem ein Pike werden? Trag dich auf die Warteliste ein – wir melden uns, sobald ein Platz frei wird."
           />
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/mitmachen" className="btn btn-olive">Schnuppertraining anfragen</Link>
+            <Link href="/mitmachen" className="btn btn-olive">Auf die Warteliste</Link>
             <Link href="/team" className="btn btn-ghost">Team kennenlernen</Link>
           </div>
         </div>

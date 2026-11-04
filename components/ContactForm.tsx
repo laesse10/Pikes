@@ -29,7 +29,7 @@ export function ContactForm() {
         </span>
         <h3 className="mt-5 text-2xl uppercase text-navy">Merci für deine Nachricht!</h3>
         <p className="mt-2 max-w-sm text-sm text-navy/65">
-          Wir melden uns so schnell wie möglich bei dir. Bis dann: bring die Schlittschuhe in Form!
+          Wir melden uns so schnell wie möglich bei dir. Stehst du auf der Warteliste, hörst du von uns, sobald ein Platz im Kader frei wird.
         </p>
         <button type="button" onClick={() => setDismissed(state)} className="btn btn-primary mt-6">
           Neue Anfrage

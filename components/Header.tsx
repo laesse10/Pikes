@@ -61,7 +61,7 @@ export function Header() {
             );
           })}
           <Link href="/mitmachen" className="btn btn-olive ml-3 !py-2.5">
-            Mitspielen
+            Warteliste
           </Link>
         </nav>
 
@@ -106,7 +106,7 @@ export function Header() {
           </Link>
         ))}
         <Link href="/mitmachen" onClick={() => setOpen(false)} className="btn btn-olive mt-6 w-full justify-center !py-4 text-base">
-          Jetzt mitspielen
+          Auf die Warteliste
         </Link>
       </nav>
     </div>

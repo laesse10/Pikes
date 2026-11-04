@@ -1,7 +1,7 @@
 // Contact form choices and state, shared by the form and its server action.
 // The server only accepts these choices.
 
-export const contactReasons = ["Schnuppertraining", "Mitspielen", "Sponsoring", "Allgemeine Frage"];
+export const contactReasons = ["Warteliste", "Sponsoring", "Allgemeine Frage"];
 export const contactPositions = ["Egal / noch offen", "Torhüter", "Verteidigung", "Sturm"];
 export const contactLevels = ["Anfänger:in", "Wiedereinsteiger:in", "Fortgeschritten", "Routinier"];
 

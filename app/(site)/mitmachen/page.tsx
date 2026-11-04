@@ -9,19 +9,19 @@ import { club } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Mitmachen & Kontakt",
   description:
-    "Lust auf Plausch-Eishockey am Zürichsee? Komm zu einem Schnuppertraining der Zürisee Pikes. Kontaktformular und alle Infos für neue Spieler:innen.",
+    "Der Kader der Zürisee Pikes ist voll besetzt. Trag dich auf die Warteliste ein – wir melden uns, sobald ein Platz frei wird.",
 };
 
 const facts = [
   { icon: "🏒", title: "Training", text: "Dienstags & freitags, 20:15–21:45 Uhr (Wintersaison)" },
   { icon: "📍", title: "Heimeis", text: `${club.homeRink}, Küsnacht ZH` },
   { icon: "🎿", title: "Niveau", text: "Plausch-Eishockey – Spass vor Resultat, alle Levels willkommen" },
-  { icon: "🧤", title: "Ausrüstung", text: "Eigene Ausrüstung von Vorteil – fürs Schnuppern haben wir Leihmaterial" },
+  { icon: "🧤", title: "Ausrüstung", text: "Eigene Ausrüstung von Vorteil" },
 ];
 
 const steps = [
-  { n: "01", title: "Melde dich", text: "Schreib uns übers Formular oder per Mail – kurz wer du bist und was du suchst." },
-  { n: "02", title: "Komm vorbei", text: "Wir laden dich zu einem unverbindlichen Schnuppertraining ein." },
+  { n: "01", title: "Trag dich ein", text: "Melde dich übers Formular mit «Warteliste» – kurz wer du bist, Position und Erfahrung." },
+  { n: "02", title: "Wir melden uns", text: "Sobald im Kader ein Platz frei wird, gehen wir die Warteliste der Reihe nach durch." },
   { n: "03", title: "Werde Pike", text: "Passt es für beide Seiten, bist du Teil der Mannschaft – inklusive Garderobenplatz." },
 ];
 
@@ -30,8 +30,8 @@ export default function JoinPage() {
     <>
       <PageHero
         eyebrow="Mitmachen & Kontakt"
-        title="Werde ein Pike"
-        intro="Du suchst ein Team, in dem der Plausch im Vordergrund steht? Wir freuen uns auf neue Gesichter – ob Wiedereinsteiger:in oder erfahrener Crack."
+        title="Kader voll – Warteliste offen"
+        intro="Unser Team ist aktuell voll besetzt, Schnuppertrainings bieten wir deshalb keine an. Trag dich auf die Warteliste ein – sobald ein Platz frei wird, melden wir uns bei dir."
         crumb="Mitmachen"
       />
 
@@ -55,7 +55,7 @@ export default function JoinPage() {
       {/* Steps */}
       <section className="ice-grid border-y border-navy/10 py-20">
         <div className="shell container-px">
-          <SectionHeading eyebrow="So einfach geht's" title="In drei Schritten aufs Eis" align="center" />
+          <SectionHeading eyebrow="So läuft's" title="Über die Warteliste aufs Eis" align="center" />
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {steps.map((s, i) => (
               <Reveal key={s.n} delay={i * 90} className="relative text-center">
@@ -72,7 +72,7 @@ export default function JoinPage() {
       <section className="py-20">
         <div className="shell container-px grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
           <div>
-            <SectionHeading eyebrow="Schreib uns" title="Anfrage senden" />
+            <SectionHeading eyebrow="Schreib uns" title="Warteliste & Kontakt" />
             <div className="mt-8">
               <ContactForm />
             </div>
