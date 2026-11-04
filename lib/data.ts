@@ -248,13 +248,13 @@ export type Sponsor = {
 };
 
 export const sponsors: Sponsor[] = [
-  { name: "die Mobiliar", logo: "/sponsors/mobiliar.png" },
-  { name: "Quadrik Asset Management AG", logo: "/sponsors/quadrik.png" },
-  { name: "Teximp", logo: "/sponsors/teximp.png" },
-  { name: "MRI Medizinisch Radiologisches Institut", logo: "/sponsors/mri.png" },
-  { name: "Frauenpraxis Küsnacht", logo: "/sponsors/frauenpraxis.png" },
-  { name: "Villa Trasqua", logo: "/sponsors/trasqua.png" },
-  { name: "IN", logo: "/sponsors/in.png" },
+  { name: "die Mobiliar", logo: "/sponsors/mobiliar.png", url: "https://www.mobiliar.ch" },
+  { name: "Quadrik Asset Management AG", logo: "/sponsors/quadrik.png", url: "https://www.quadrik.ch" },
+  { name: "Teximp", logo: "/sponsors/teximp.png", url: "https://www.teximp.ch" },
+  { name: "MRI Medizinisch Radiologisches Institut", logo: "/sponsors/mri.png", url: "https://www.mri-roentgen.ch" },
+  { name: "Frauenpraxis Küsnacht", logo: "/sponsors/frauenpraxis.png", url: "https://www.frauenpraxis-kuesnacht.ch" },
+  { name: "Villa Trasqua", logo: "/sponsors/trasqua.png", url: "https://www.villatrasqua.it" },
+  { name: "Intellyse", logo: "/sponsors/in.png", url: "https://www.intellyse.com" },
 ];
 
 export const sponsorTiers: SponsorTier[] = ["Hauptsponsor", "Co-Sponsor", "Supporter"];
