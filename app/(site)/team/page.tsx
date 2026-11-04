@@ -173,7 +173,7 @@ export default function TeamPage() {
       <section className="py-20 sm:py-28">
         <div className="shell container-px grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <SectionHeading eyebrow="Seit 2014" title="Unsere Geschichte" />
+            <SectionHeading eyebrow="Seit 2026" title="Unsere Geschichte" />
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-navy/75">
               <p>{historyIntro}</p>
               <p>{historyText}</p>
