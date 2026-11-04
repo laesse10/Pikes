@@ -13,6 +13,8 @@ import { historyIntro, historyText, roster, milestones, teamPhoto, teamPhotoFocu
 export const metadata: Metadata = {
   title: "Team",
   description: "Der Kader der Zürisee Pikes: Torhüter, Verteidigung, Sturm und die Vereinsgeschichte.",
+  // Names next to the team photo: keep the page out of search results and image search.
+  robots: { index: false, follow: false, noarchive: true, noimageindex: true },
 };
 
 type Tone = "navy" | "olive" | "cream";
