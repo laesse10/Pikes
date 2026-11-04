@@ -12,13 +12,6 @@ export const metadata: Metadata = {
     "Der Kader der Zürisee Pikes ist voll besetzt. Trag dich auf die Warteliste ein – wir melden uns, sobald ein Platz frei wird.",
 };
 
-const facts = [
-  { icon: "🏒", title: "Training", text: "Dienstags & freitags, 20:15–21:45 Uhr (Wintersaison)" },
-  { icon: "📍", title: "Heimeis", text: `${club.homeRink}, Küsnacht ZH` },
-  { icon: "🎿", title: "Niveau", text: "Plausch-Eishockey – Spass vor Resultat, alle Levels willkommen" },
-  { icon: "🧤", title: "Ausrüstung", text: "Eigene Ausrüstung von Vorteil" },
-];
-
 const steps = [
   { n: "01", title: "Trag dich ein", text: "Melde dich übers Formular mit «Warteliste» – kurz wer du bist, Position und Erfahrung." },
   { n: "02", title: "Wir melden uns", text: "Sobald im Kader ein Platz frei wird, gehen wir die Warteliste der Reihe nach durch." },
@@ -34,23 +27,6 @@ export default function JoinPage() {
         intro="Unser Team ist aktuell voll besetzt, Schnuppertrainings bieten wir deshalb keine an. Trag dich auf die Warteliste ein – sobald ein Platz frei wird, melden wir uns bei dir."
         crumb="Mitmachen"
       />
-
-      {/* Facts */}
-      <section className="py-16 sm:py-20">
-        <div className="shell container-px">
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {facts.map((f, i) => (
-              <Reveal key={f.title} delay={i * 70}>
-                <div className="card h-full rounded p-6">
-                  <span className="text-3xl">{f.icon}</span>
-                  <h3 className="mt-4 font-display text-lg font-bold uppercase text-navy">{f.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-navy/65">{f.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Steps */}
       <section className="ice-grid border-y border-navy/10 py-20">
